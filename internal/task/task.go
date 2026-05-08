@@ -1,0 +1,35 @@
+package task
+
+import (
+	"time"
+)
+
+type Status string
+
+const (
+	StatusPending Status = "pending"
+	StatusDone    Status = "done"
+)
+
+type Task struct {
+	ID        int        `json:"id"`
+	Title     string     `json:"title"`
+	Status    Status     `json:"status"`
+	CreatedAt time.Time  `json:"created_at"`
+	DoneAt    *time.Time `json:"done_at,omitempty"`
+}
+
+func NewTask(id int, title string) Task {
+	return Task{
+		ID:        id,
+		Title:     title,
+		Status:    StatusPending,
+		CreatedAt: time.Now(),
+	}
+}
+
+func (t *Task) Completed() {
+	now := time.Now()
+	t.Status = StatusDone
+	t.DoneAt = &now
+}
