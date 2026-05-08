@@ -1,6 +1,7 @@
 package task
 
 import (
+	"fmt"
 	"time"
 )
 
@@ -28,8 +29,22 @@ func NewTask(id int, title string) Task {
 	}
 }
 
+func (t *Task) IsPending() bool {
+	return t.Status == StatusPending
+}
+
 func (t *Task) Completed() {
 	now := time.Now()
 	t.Status = StatusDone
 	t.DoneAt = &now
+}
+
+func (t Task) String() string {
+	icon := "[]"
+
+	if t.Status == StatusDone {
+		icon = "[✓]"
+	}
+
+	return fmt.Sprintf("%s %d: %s", icon, t.ID, t.Title)
 }
