@@ -29,8 +29,12 @@ func NewTask(id int, title string) Task {
 	}
 }
 
-func (t *Task) IsPending() bool {
+func (t *Task) Test() bool {
 	return t.Status == StatusPending
+}
+
+func (t *Task) IsDone() bool {
+	return t.Status == StatusDone
 }
 
 func (t *Task) Completed() {
@@ -40,7 +44,7 @@ func (t *Task) Completed() {
 }
 
 func (t Task) String() string {
-	icon := "[]"
+	icon := "[ ]"
 
 	if t.Status == StatusDone {
 		icon = "[✓]"
