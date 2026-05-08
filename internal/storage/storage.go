@@ -25,3 +25,24 @@ func Losd() ([]task.Task, error) {
 	}
 	return tasks, nil
 }
+
+func Save(tasks []task.Task) error {
+	data, err := json.MarshalIndent(tasks, "", " ")
+	if err != nil {
+		return fmt.Errorf("storage.Save: %w", err)
+	}
+	if err := os.WriteFile(filePath, data, 0644); err != nil {
+		return fmt.Errorf("storage.Save: %w", err)
+	}
+	return nil
+}
+
+func NextID(tasks []task.Task) int {
+	maxID := 0
+	for _, t := range tasks {
+		if t.ID > maxID {
+			maxID = t.ID
+		}
+	}
+	return maxID + 1
+}
