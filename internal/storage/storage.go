@@ -9,9 +9,9 @@ import (
 	"github.com/osvaldsoza/cli-todo/internal/task"
 )
 
-const filePath = "taks.json"
+const filePath = "tasks.json"
 
-func Losd() ([]task.Task, error) {
+func Load() ([]task.Task, error) {
 	data, err := os.ReadFile(filePath)
 	if err != nil {
 		if errors.Is(err, os.ErrNotExist) {
