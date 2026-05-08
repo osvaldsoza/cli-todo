@@ -29,14 +29,6 @@ func NewTask(id int, title string) Task {
 	}
 }
 
-func (t *Task) Test() bool {
-	return t.Status == StatusPending
-}
-
-func (t *Task) IsDone() bool {
-	return t.Status == StatusDone
-}
-
 func (t *Task) Completed() {
 	now := time.Now()
 	t.Status = StatusDone
